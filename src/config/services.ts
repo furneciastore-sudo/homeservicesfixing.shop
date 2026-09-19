@@ -18,6 +18,8 @@ export type ServiceConfig = {
   /** e.g. "Call HVAC" */
   callLabel: string;
   tagline: string;
+  /** Punchy 2-4 word title used on the premium service card, e.g. "Heating & Cooling" */
+  cardTagline: string;
   description: string;
   /** Common jobs shown as a bullet list on the service page/card. */
   subservices: string[];
@@ -37,6 +39,7 @@ export const SERVICES: Record<ServiceSlug, ServiceConfig> = {
     shortName: "HVAC",
     callLabel: "Call HVAC",
     tagline: "HVAC Service Help Near You",
+    cardTagline: "Heating & Cooling",
     description:
       "Find help fast for air conditioning and heating problems — from a system that won't cool to a furnace that won't start.",
     subservices: [
@@ -65,6 +68,7 @@ export const SERVICES: Record<ServiceSlug, ServiceConfig> = {
     shortName: "Plumbing",
     callLabel: "Call Plumbing",
     tagline: "Plumbing Service Help Near You",
+    cardTagline: "Pipes & Water Heaters",
     description:
       "Get connected for leaks, clogged drains, water heater trouble, and other plumbing issues that need attention now.",
     subservices: [
@@ -92,6 +96,7 @@ export const SERVICES: Record<ServiceSlug, ServiceConfig> = {
     shortName: "Electrician",
     callLabel: "Call Electrician",
     tagline: "Electrical Service Help Near You",
+    cardTagline: "Wiring & Power",
     description:
       "Find help for electrical panel issues, faulty wiring, dead outlets, and other electrical problems around the home.",
     subservices: [
@@ -119,6 +124,7 @@ export const SERVICES: Record<ServiceSlug, ServiceConfig> = {
     shortName: "Appliance",
     callLabel: "Get Appliance Help",
     tagline: "Appliance Repair Help Near You",
+    cardTagline: "Appliance Repair",
     description:
       "Support for major household appliances that stop working when you need them most.",
     subservices: [
@@ -144,6 +150,7 @@ export const SERVICES: Record<ServiceSlug, ServiceConfig> = {
     shortName: "Roofing",
     callLabel: "Get Roofing Help",
     tagline: "Roofing Service Help Near You",
+    cardTagline: "Roof Repair",
     description:
       "Support for leaks, storm damage, missing shingles, and other residential roofing concerns.",
     subservices: [
@@ -169,6 +176,7 @@ export const SERVICES: Record<ServiceSlug, ServiceConfig> = {
     shortName: "Locksmith",
     callLabel: "Get Locksmith Help",
     tagline: "Locksmith Help Near You",
+    cardTagline: "Locks & Entry",
     description:
       "Support for lockouts, broken locks, rekeying, and residential lock or key problems.",
     subservices: [
@@ -194,6 +202,7 @@ export const SERVICES: Record<ServiceSlug, ServiceConfig> = {
     shortName: "Garage Door",
     callLabel: "Get Garage Door Help",
     tagline: "Garage Door Repair Help Near You",
+    cardTagline: "Garage Door Systems",
     description:
       "Support for garage doors that won't open, close, or operate safely.",
     subservices: [

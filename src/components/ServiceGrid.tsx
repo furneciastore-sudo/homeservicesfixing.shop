@@ -1,17 +1,7 @@
 import { ServiceVisual } from "@/components/ServiceVisual";
 import { TrackedLink } from "@/components/TrackedLink";
+import { SERVICE_PHOTO_CAPTIONS } from "@/config/serviceImages";
 import { SERVICE_LIST } from "@/config/services";
-import { getCoverageCount } from "@/lib/coverage";
-
-const CAPTIONS: Record<string, string> = {
-  hvac: "HVAC technician servicing an indoor AC unit",
-  plumbing: "Plumber repairing a residential water heater",
-  electrician: "Electrician working on a home electrical panel",
-  "appliance-repair": "Technician repairing a kitchen appliance",
-  roofing: "Roofer inspecting a residential roof",
-  locksmith: "Locksmith working on a home entry lock",
-  "garage-door-repair": "Technician repairing a garage door mechanism",
-};
 
 export function ServiceGrid() {
   return (
@@ -33,26 +23,28 @@ export function ServiceGrid() {
             href={`/${service.slug}`}
             event="service_selected"
             payload={{ service: service.slug, location: "service-grid" }}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            className="group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl shadow-sm transition hover:shadow-xl"
           >
             <ServiceVisual
               service={service.slug}
-              caption={CAPTIONS[service.slug]}
-              className="aspect-[16/10] w-full"
+              caption={SERVICE_PHOTO_CAPTIONS[service.slug]}
+              zoomOnHover
+              className="absolute inset-0"
             />
-            <div className="flex flex-1 flex-col p-5">
-              <h3 className="text-lg font-bold text-primary">
-                {service.name}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+
+            <div className="relative flex flex-col p-6 text-white">
+              <span className="text-xs font-bold uppercase tracking-widest text-white/70">
+                {service.shortName}
+              </span>
+              <h3 className="mt-1 text-2xl font-extrabold tracking-tight">
+                {service.cardTagline}
               </h3>
-              <p className="mt-1.5 text-sm text-muted">
+              <p className="mt-2 text-sm text-white/80">
                 {service.description}
               </p>
-              <p className="mt-2 text-xs font-medium text-muted">
-                Available in {getCoverageCount(service.slug).toLocaleString()}{" "}
-                ZIP codes
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-accent">
-                Find Service
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-accent">
+                Check Availability
                 <span
                   aria-hidden="true"
                   className="transition group-hover:translate-x-1"

@@ -4,9 +4,17 @@ export function ServiceFinderSection() {
   return (
     <section
       id="service-finder"
-      className="scroll-mt-20 bg-primary py-16 sm:py-20"
+      className="relative isolate scroll-mt-20 overflow-hidden bg-primary py-16 sm:py-24"
     >
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(115deg, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 72px)",
+        }}
+        aria-hidden="true"
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
         <div className="text-white">
           <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
             Find Home Service Help Near You

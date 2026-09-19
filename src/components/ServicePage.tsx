@@ -4,6 +4,7 @@ import { CallLink } from "@/components/CallLink";
 import { PageViewTracker } from "@/components/PageViewTracker";
 import { ServiceVisual } from "@/components/ServiceVisual";
 import { ZipChecker } from "@/components/ZipChecker";
+import { SERVICE_PHOTO_CAPTIONS } from "@/config/serviceImages";
 import { getService, hasPhone, type ServiceSlug } from "@/config/services";
 import {
   getCoverageCount,
@@ -11,16 +12,6 @@ import {
   getStates,
   stateNameToSlug,
 } from "@/lib/coverage";
-
-const CAPTIONS: Record<ServiceSlug, string> = {
-  hvac: "HVAC technician servicing an indoor AC unit",
-  plumbing: "Plumber repairing a residential water heater",
-  electrician: "Electrician working on a home electrical panel",
-  "appliance-repair": "Technician repairing a kitchen appliance",
-  roofing: "Roofer inspecting a residential roof",
-  locksmith: "Locksmith working on a home entry lock",
-  "garage-door-repair": "Technician repairing a garage door mechanism",
-};
 
 export function generateServiceMetadata(slug: ServiceSlug): Metadata {
   const service = getService(slug)!;
@@ -93,8 +84,10 @@ export function ServicePage({ slug }: { slug: ServiceSlug }) {
 
           <ServiceVisual
             service={slug}
-            caption={CAPTIONS[slug]}
-            className="aspect-[4/3] w-full shadow-xl"
+            caption={SERVICE_PHOTO_CAPTIONS[slug]}
+            variant="hero"
+            priority
+            className="aspect-[4/3] w-full rounded-2xl shadow-xl"
           />
         </div>
       </section>
@@ -130,6 +123,15 @@ export function ServicePage({ slug }: { slug: ServiceSlug }) {
       </section>
 
       <CommonProblemsForService slug={slug} />
+
+      <section className="mx-auto max-w-6xl px-4 pb-14 sm:px-6">
+        <ServiceVisual
+          service={slug}
+          caption={SERVICE_PHOTO_CAPTIONS[slug]}
+          variant="detail"
+          className="aspect-[21/9] w-full rounded-2xl"
+        />
+      </section>
 
       {states.length > 0 && (
         <section id="service-areas" className="bg-surface py-14">

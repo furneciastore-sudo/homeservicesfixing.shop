@@ -1,9 +1,11 @@
+import { CallNowMenu } from "@/components/CallNowMenu";
+
 const STEPS = [
   {
     number: "01",
     title: "Choose Your Service",
     description:
-      "Pick from HVAC, plumbing, electrical, appliance, roofing, locksmith, or garage door.",
+      "Select HVAC, plumbing, electrical, or another home-service category.",
   },
   {
     number: "02",
@@ -13,42 +15,41 @@ const STEPS = [
   },
   {
     number: "03",
-    title: "Call for Service Help",
+    title: "Call Directly",
     description:
-      "Tap Call Now to dial directly from your phone — no forms, no waiting.",
+      "Call the appropriate service number from your phone — no forms, no waiting.",
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="bg-surface py-16 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section id="how-it-works" className="bg-surface py-16 sm:py-24">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">
             How It Works
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-3">
-          {STEPS.map((step, i) => (
-            <div key={step.number} className="relative text-center sm:text-left">
-              <span className="text-5xl font-black text-border">
+        <ol className="relative mt-14 space-y-14 border-l-2 border-border pl-8 sm:pl-10">
+          {STEPS.map((step) => (
+            <li key={step.number} className="relative">
+              <span className="absolute -left-[3.05rem] top-0 flex h-9 w-9 items-center justify-center rounded-full bg-primary text-sm font-black text-white sm:-left-[3.55rem] sm:h-10 sm:w-10">
                 {step.number}
               </span>
-              <h3 className="mt-3 text-lg font-bold text-primary">
+              <h3 className="text-xl font-bold text-primary sm:text-2xl">
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm text-muted">{step.description}</p>
-              {i < STEPS.length - 1 && (
-                <span
-                  aria-hidden="true"
-                  className="absolute right-[-1rem] top-6 hidden text-2xl text-border sm:block"
-                >
-                  →
-                </span>
-              )}
-            </div>
+              <p className="mt-2 max-w-md text-muted">{step.description}</p>
+            </li>
           ))}
+        </ol>
+
+        <div className="mt-14 flex justify-center">
+          <CallNowMenu
+            location="how-it-works"
+            buttonClassName="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-accent px-8 py-4 text-base font-bold text-white shadow-md transition hover:bg-accent-dark"
+          />
         </div>
       </div>
     </section>

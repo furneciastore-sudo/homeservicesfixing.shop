@@ -1,13 +1,14 @@
+import Image from "next/image";
 import type { ServiceSlug } from "@/config/services";
 import { SERVICE_ICONS } from "@/components/icons";
+import { serviceImages } from "@/config/serviceImages";
 
 /**
- * Placeholder "photography" panel used everywhere the spec calls for a
- * real action photo (technician working on a system). These are original
- * gradient/illustration art — not stock photos, so there is no licensing
- * risk — but they are a stand-in. To use real photography instead, drop
- * a licensed image at public/images/services/<slug>.jpg and swap the
- * <div> below for a Next.js <Image src={`/images/services/${service}.jpg`} .../>.
+ * Renders a real photo when one has been configured in
+ * src/config/serviceImages.ts, otherwise falls back to an original
+ * gradient/icon placeholder — never a broken image, never a stock photo
+ * we don't have the rights to use. Once real photography is added, every
+ * usage of this component picks it up automatically.
  */
 
 const GRADIENTS: Record<ServiceSlug, string> = {
@@ -23,16 +24,46 @@ const GRADIENTS: Record<ServiceSlug, string> = {
 export function ServiceVisual({
   service,
   caption,
+  variant = "card",
+  zoomOnHover = false,
+  priority = false,
   className = "",
 }: {
   service: ServiceSlug;
   caption: string;
+  /** "hero" renders a larger icon badge; "card" is the compact default. */
+  variant?: "hero" | "card" | "detail";
+  /** Set true when the parent has `group` + `overflow-hidden` for a hover-zoom card. */
+  zoomOnHover?: boolean;
+  priority?: boolean;
   className?: string;
 }) {
+  const photo = serviceImages[service]?.[variant];
   const Icon = SERVICE_ICONS[service];
+
+  if (photo) {
+    return (
+      <div className={`relative isolate overflow-hidden ${className}`}>
+        <Image
+          src={photo}
+          alt={caption}
+          fill
+          priority={priority}
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className={`object-cover ${zoomOnHover ? "transition duration-500 group-hover:scale-105" : ""}`}
+        />
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 pt-12">
+          <p className="text-xs font-medium uppercase tracking-wide text-white/85">
+            {caption}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
-      className={`relative isolate overflow-hidden rounded-2xl bg-gradient-to-br ${GRADIENTS[service]} ${className}`}
+      className={`relative isolate overflow-hidden bg-gradient-to-br ${GRADIENTS[service]} ${className}`}
     >
       <div
         className="absolute inset-0 opacity-[0.15]"
@@ -42,9 +73,15 @@ export function ServiceVisual({
         }}
         aria-hidden="true"
       />
-      <div className="relative flex h-full flex-col items-center justify-center p-8">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/25 backdrop-blur">
-          <Icon className="h-8 w-8 text-white" />
+      <div
+        className={`relative flex h-full flex-col items-center justify-center p-8 ${zoomOnHover ? "transition duration-500 group-hover:scale-105" : ""}`}
+      >
+        <div
+          className={`flex items-center justify-center rounded-full bg-white/10 ring-1 ring-white/25 backdrop-blur ${
+            variant === "hero" ? "h-20 w-20" : "h-16 w-16"
+          }`}
+        >
+          <Icon className={variant === "hero" ? "h-10 w-10 text-white" : "h-8 w-8 text-white"} />
         </div>
       </div>
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-4 pt-10">
