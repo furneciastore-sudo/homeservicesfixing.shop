@@ -11,24 +11,22 @@ import type { ServiceSlug } from "@/config/services";
  * image and never a stock photo we don't have the rights to use.
  *
  * Expected file locations once populated (all under public/):
- *   /images/services/<slug>-hero.jpg     — large cinematic hero crop
- *   /images/services/<slug>-card.jpg     — service grid card (16:10ish)
- *   /images/services/<slug>-detail.jpg   — service page detail shot
- *   /images/services/<slug>-technician.jpg — action-strip / showcase shot
+ *   /images/services/<slug>-hero.jpg   — large cinematic hero crop (4:3)
+ *   /images/services/<slug>-card.jpg   — service grid card (4:5 portrait)
+ *   /images/services/<slug>-detail.jpg — service page action banner (21:9)
  */
 export type ServiceImageSet = {
   hero: string | null;
   card: string | null;
   detail: string | null;
-  technician: string | null;
 };
 
 function emptySet(): ServiceImageSet {
-  return { hero: null, card: null, detail: null, technician: null };
+  return { hero: null, card: null, detail: null };
 }
 
 export const serviceImages: Record<ServiceSlug, ServiceImageSet> = {
-  hvac: emptySet(),
+  hvac: { ...emptySet(), hero: "/images/services/hvac-hero.webp" },
   plumbing: emptySet(),
   electrician: emptySet(),
   "appliance-repair": emptySet(),
