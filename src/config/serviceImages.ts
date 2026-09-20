@@ -31,7 +31,7 @@ export const serviceImages: Record<ServiceSlug, ServiceImageSet> = {
     card: "/images/services/hvac-card.jpg",
     detail: "/images/services/hvac-detail.webp",
   },
-  plumbing: emptySet(),
+  plumbing: { ...emptySet(), card: "/images/services/plumbing-card.webp" },
   electrician: { ...emptySet(), card: "/images/services/electrician-card.webp" },
   "appliance-repair": emptySet(),
   roofing: emptySet(),
@@ -42,7 +42,7 @@ export const serviceImages: Record<ServiceSlug, ServiceImageSet> = {
 /** Short, honest, non-claim-making captions — describe the scene, invent nothing. */
 export const SERVICE_PHOTO_CAPTIONS: Record<ServiceSlug, string> = {
   hvac: "Residential AC condenser service",
-  plumbing: "Water heater repair",
+  plumbing: "Residential plumbing service",
   electrician: "Residential electrical service",
   "appliance-repair": "Appliance diagnostic and repair",
   roofing: "Residential roof inspection",
