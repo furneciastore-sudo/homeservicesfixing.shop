@@ -26,7 +26,11 @@ function emptySet(): ServiceImageSet {
 }
 
 export const serviceImages: Record<ServiceSlug, ServiceImageSet> = {
-  hvac: { ...emptySet(), hero: "/images/services/hvac-hero.webp" },
+  hvac: {
+    ...emptySet(),
+    hero: "/images/services/hvac-hero.webp",
+    card: "/images/services/hvac-card.jpg",
+  },
   plumbing: emptySet(),
   electrician: emptySet(),
   "appliance-repair": emptySet(),
