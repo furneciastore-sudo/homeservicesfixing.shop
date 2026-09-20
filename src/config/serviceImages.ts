@@ -34,7 +34,7 @@ export const serviceImages: Record<ServiceSlug, ServiceImageSet> = {
   plumbing: { ...emptySet(), card: "/images/services/plumbing-card.webp" },
   electrician: { ...emptySet(), card: "/images/services/electrician-card.webp" },
   "appliance-repair": emptySet(),
-  roofing: emptySet(),
+  roofing: { ...emptySet(), hero: "/images/services/roofing-hero.webp" },
   locksmith: emptySet(),
   "garage-door-repair": {
     ...emptySet(),
