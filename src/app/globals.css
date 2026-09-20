@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  /* Design tokens — deep navy + warm orange CTA, per brand spec. */
-  --primary: #0b1f3a;
-  --primary-dark: #071426;
+  /* Design tokens — navy sampled from the technician uniform photos + warm orange CTA. */
+  --primary: #2f3b53;
+  --primary-dark: #1f2838;
   --accent: #ef7d1a;
   --accent-dark: #d4670c;
   --background: #f7f8fa;
