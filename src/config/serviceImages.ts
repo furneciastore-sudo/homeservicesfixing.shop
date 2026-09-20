@@ -11,22 +11,28 @@ import type { ServiceSlug } from "@/config/services";
  * image and never a stock photo we don't have the rights to use.
  *
  * Expected file locations once populated (all under public/):
- *   /images/services/<slug>-hero.jpg   — large cinematic hero crop (4:3)
- *   /images/services/<slug>-card.jpg   — service grid card (4:5 portrait)
- *   /images/services/<slug>-detail.jpg — service page action banner (21:9)
+ *   /images/services/<slug>-hero.jpg      — large cinematic hero crop (4:3)
+ *   /images/services/<slug>-card.jpg      — service grid card (4:5 portrait)
+ *   /images/services/<slug>-detail.jpg    — service page action banner (21:9)
+ *   /images/services/<slug>-project-1.jpg — "Recent Work" gallery slot 1 (1:1)
+ *   /images/services/<slug>-project-2.jpg — gallery slot 2
+ *   /images/services/<slug>-project-3.jpg — gallery slot 3
+ *   /images/services/<slug>-project-4.jpg — gallery slot 4
  */
 export type ServiceImageSet = {
   hero: string | null;
   card: string | null;
   detail: string | null;
+  gallery: [string | null, string | null, string | null, string | null];
 };
 
 function emptySet(): ServiceImageSet {
-  return { hero: null, card: null, detail: null };
+  return { hero: null, card: null, detail: null, gallery: [null, null, null, null] };
 }
 
 export const serviceImages: Record<ServiceSlug, ServiceImageSet> = {
   hvac: {
+    ...emptySet(),
     hero: "/images/services/hvac-hero.webp",
     card: "/images/services/hvac-card.jpg",
     detail: "/images/services/hvac-detail.webp",
