@@ -11,37 +11,51 @@ import type { ServiceSlug } from "@/config/services";
  * image and never a stock photo we don't have the rights to use.
  *
  * Expected file locations once populated (all under public/):
- *   /images/services/<slug>-hero.jpg     — large cinematic hero crop
- *   /images/services/<slug>-card.jpg     — service grid card (16:10ish)
- *   /images/services/<slug>-detail.jpg   — service page detail shot
- *   /images/services/<slug>-technician.jpg — action-strip / showcase shot
+ *   /images/services/<slug>-hero.jpg      — large cinematic hero crop (4:3)
+ *   /images/services/<slug>-card.jpg      — service grid card (4:5 portrait)
+ *   /images/services/<slug>-detail.jpg    — service page action banner (21:9)
+ *   /images/services/<slug>-project-1.jpg — "Recent Work" gallery slot 1 (1:1)
+ *   /images/services/<slug>-project-2.jpg — gallery slot 2
+ *   /images/services/<slug>-project-3.jpg — gallery slot 3
+ *   /images/services/<slug>-project-4.jpg — gallery slot 4
  */
 export type ServiceImageSet = {
   hero: string | null;
   card: string | null;
   detail: string | null;
-  technician: string | null;
+  gallery: [string | null, string | null, string | null, string | null];
 };
 
 function emptySet(): ServiceImageSet {
-  return { hero: null, card: null, detail: null, technician: null };
+  return { hero: null, card: null, detail: null, gallery: [null, null, null, null] };
 }
 
 export const serviceImages: Record<ServiceSlug, ServiceImageSet> = {
-  hvac: emptySet(),
-  plumbing: emptySet(),
-  electrician: emptySet(),
-  "appliance-repair": emptySet(),
-  roofing: emptySet(),
-  locksmith: emptySet(),
-  "garage-door-repair": emptySet(),
+  hvac: {
+    ...emptySet(),
+    hero: "/images/services/hvac-hero.webp",
+    card: "/images/services/hvac-card.jpg",
+    detail: "/images/services/hvac-detail.webp",
+  },
+  plumbing: { ...emptySet(), card: "/images/services/plumbing-card.webp" },
+  electrician: { ...emptySet(), card: "/images/services/electrician-card.webp" },
+  "appliance-repair": {
+    ...emptySet(),
+    hero: "/images/services/appliance-repair-hero.webp",
+  },
+  roofing: { ...emptySet(), hero: "/images/services/roofing-hero.webp" },
+  locksmith: { ...emptySet(), hero: "/images/services/locksmith-hero.webp" },
+  "garage-door-repair": {
+    ...emptySet(),
+    hero: "/images/services/garage-door-repair-hero.webp",
+  },
 };
 
 /** Short, honest, non-claim-making captions — describe the scene, invent nothing. */
 export const SERVICE_PHOTO_CAPTIONS: Record<ServiceSlug, string> = {
   hvac: "Residential AC condenser service",
-  plumbing: "Water heater repair",
-  electrician: "Electrical panel inspection",
+  plumbing: "Residential plumbing service",
+  electrician: "Residential electrical service",
   "appliance-repair": "Appliance diagnostic and repair",
   roofing: "Residential roof inspection",
   locksmith: "Residential lock service",

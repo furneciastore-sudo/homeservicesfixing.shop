@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { CallLink } from "@/components/CallLink";
 import { PageViewTracker } from "@/components/PageViewTracker";
+import { ProjectGallery } from "@/components/ProjectGallery";
 import { ServiceVisual } from "@/components/ServiceVisual";
 import { ZipChecker } from "@/components/ZipChecker";
 import { SERVICE_PHOTO_CAPTIONS } from "@/config/serviceImages";
@@ -132,6 +133,8 @@ export function ServicePage({ slug }: { slug: ServiceSlug }) {
           className="aspect-[21/9] w-full rounded-2xl"
         />
       </section>
+
+      <ProjectGallery service={slug} />
 
       {states.length > 0 && (
         <section id="service-areas" className="bg-surface py-14">
