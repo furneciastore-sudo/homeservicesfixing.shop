@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Plain CommonJS Node entry point for Passenger-style hosts — not part
+    // of the Next.js app source, so the app's TS/import rules don't apply.
+    "server.js",
   ]),
 ]);
 
